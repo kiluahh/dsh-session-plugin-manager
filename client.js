@@ -461,6 +461,14 @@ window.__ModuleLoader__.load({
           publishLocale(readLocale(ctx))
         })
       })
+      try {
+        // 事件与 subscribe 双保险：任一通道可用都能跟上语言切换。
+        ctx.on('locale/change', function (snapshot) {
+          publishLocale(snapshotId(snapshot) || readLocale(ctx))
+        })
+      } catch {
+        // 没有该事件的环境继续用上面的 subscribe。
+      }
       ctx.inject(['sidebarRightTabs'], function (injected) {
         var tabs = injected.get('sidebarRightTabs')
         if (!tabs || typeof tabs.register !== 'function') {
