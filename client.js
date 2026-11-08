@@ -453,23 +453,14 @@ window.__ModuleLoader__.load({
     function apply(ctx) {
       ensureStyles()
       publishLocale(readLocale(ctx))
-      var unsubscribeLocale = null
-      try {
-        var service = ctx.get('locale')
-        if (service && typeof service.subscribe === 'function') {
-          unsubscribeLocale = service.subscribe(function () {
-            publishLocale(readLocale(ctx))
-          })
-          if (typeof ctx.effect === 'function') {
-            ctx.effect(function () {
-              return unsubscribeLocale
-            })
-            unsubscribeLocale = null
-          }
-        }
-      } catch {
-        // 订阅失败不影响面板本身。
-      }
+      ctx.inject(['locale'], function (injected) {
+        var service = injected.get('locale')
+        if (!service || typeof service.subscribe !== 'function') return undefined
+        publishLocale(readLocale(ctx))
+        return service.subscribe(function () {
+          publishLocale(readLocale(ctx))
+        })
+      })
       ctx.inject(['sidebarRightTabs'], function (injected) {
         var tabs = injected.get('sidebarRightTabs')
         if (!tabs || typeof tabs.register !== 'function') {
@@ -516,10 +507,6 @@ window.__ModuleLoader__.load({
           return ctx.slots.register({ name: 'sidebar.right.pane.tab.title', key: TYPE_ID }, TabTitle)
         })
         return function () {
-          if (unsubscribeLocale) {
-            unsubscribeLocale()
-            unsubscribeLocale = null
-          }
           disposeTitle()
           disposeBody()
           disposeType()
