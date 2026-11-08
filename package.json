@@ -1,0 +1,62 @@
+{
+  "name": "dsh-session-plugin-manager",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Per-session plugin switches in the DSH right sidebar: hide a plugin's tools, prompt sections and skills for one session only",
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "plugin-manager",
+    "session",
+    "sidebar",
+    "i18n"
+  ],
+  "homepage": "https://github.com/kiluahh/dsh-session-plugin-manager#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiluahh/dsh-session-plugin-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kiluahh/dsh-session-plugin-manager/issues"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "lib/*.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node test/smoke-test.mjs && node test/client-locale.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "meta": {
+      "title": {
+        "en": "Session Plugin Manager",
+        "zh-CN": "会话插件管理器"
+      },
+      "description": {
+        "en": "Turn a plugin's tools, prompt sections and skills on or off for the current session only; other sessions and global settings are untouched.",
+        "zh-CN": "只对当前会话开关插件的工具、提示词段和技能；不影响其它会话和全局设置。"
+      }
+    },
+    "client": {
+      "platform": "web",
+      "inject": ["@deepseek-ai/dsh-client-ui-sidebar-right"]
+    }
+  }
+}

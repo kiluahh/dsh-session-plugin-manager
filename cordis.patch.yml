@@ -1,0 +1,5 @@
+# 一行同时服务宿主半（Loader 行）与浏览器半（dsh.client 声明）。
+# 行 id / name 必须与包名一致。
+- insert:
+    - id: dsh-session-plugin-manager
+      name: dsh-session-plugin-manager

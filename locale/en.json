@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Session Plugin Manager",
+    "description": "Per-session plugin tool switches in the right sidebar; global plugin settings stay untouched."
+  }
+}
