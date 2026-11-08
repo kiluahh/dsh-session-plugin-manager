@@ -441,6 +441,8 @@ test('catalog: filter, tools, hideable, reasons', async () => {
   assert.equal(skill.hideable, false)
   assert.equal(skill.unavailableReason, 'no-tools')
   assert.equal(resolveLocalized({ en: 'Web', 'zh-CN': '网页工具' }, 'zh-CN'), '网页工具')
+  assert.equal(resolveLocalized({ en: 'Web', 'zh-CN': '网页工具' }, 'zh'), '网页工具')
+  assert.equal(resolveLocalized({ en: 'Web', 'zh-Hans': '网页工具' }, 'zh-CN'), '网页工具')
   assert.equal(resolveLocalized({ en: 'Web', 'zh-CN': '网页工具' }, 'ja'), 'Web')
   assert.equal(resolveLocalized({ en: 'Web', 'zh-CN': '网页工具' }, 'fr-FR'), 'Web')
   assert.equal(resolveLocalized('plain', 'en'), 'plain')
@@ -578,6 +580,10 @@ test('routes: GET /state validates session and resolves locale', async () => {
   const english = fakeResponse()
   await routes.handleState(fakeRequest(), english, new URL('http://x/state?sessionId=session-1&locale=ja'))
   assert.equal(english.body.bundles[0].title, 'Web')
+
+  const shortChinese = fakeResponse()
+  await routes.handleState(fakeRequest(), shortChinese, new URL('http://x/state?sessionId=session-1&locale=zh'))
+  assert.equal(shortChinese.body.bundles[0].title, '网页工具')
 
   const bad = fakeResponse()
   await routes.handleState(fakeRequest(), bad, new URL('http://x/state?sessionId=oops'))
