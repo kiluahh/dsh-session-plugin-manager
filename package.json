@@ -1,10 +1,12 @@
 {
   "name": "dsh-session-plugin-manager",
-  "version": "0.2.0",
-  "private": true,
+  "version": "0.2.1",
   "type": "module",
   "description": "Per-session plugin switches in the DSH right sidebar: hide a plugin's tools, prompt sections and skills for one session only",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "dsh",
     "deepseek-harness",

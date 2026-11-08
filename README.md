@@ -2,7 +2,7 @@
 
 Per-session plugin switches in the **DeepSeek Harness** right sidebar. Turn a plugin's model-facing surface off for **the current session only** — its tools, prompt sections, and skills disappear from that session, while other sessions and the global plugin settings stay untouched.
 
-[中文说明](#中文说明) · MIT License · tested with DSH `0.2.2-rc.1`
+[中文说明](#中文说明) · MIT License · tested with DSH `0.2.2-rc.1` · [![npm version](https://img.shields.io/npm/v/dsh-session-plugin-manager.svg)](https://www.npmjs.com/package/dsh-session-plugin-manager)
 
 ---
 
@@ -29,6 +29,14 @@ Per-session plugin switches in the **DeepSeek Harness** right sidebar. Turn a pl
 - No runtime dependencies outside DSH; the code uses Node built-ins only.
 
 ## Install
+
+### From npm
+
+```js
+plugin_manager({ action: 'install_bundle', target: 'dsh-session-plugin-manager' })
+```
+
+Published as [`dsh-session-plugin-manager`](https://www.npmjs.com/package/dsh-session-plugin-manager) on the public npm registry.
 
 ### From a local checkout
 
@@ -119,10 +127,14 @@ MIT — see [LICENSE](LICENSE).
 ### 安装
 
 ```js
+plugin_manager({ action: 'install_bundle', target: 'dsh-session-plugin-manager' }) // npm
+// 或
 plugin_manager({ action: 'install_bundle', target: 'D:\\path\\to\\dsh-session-plugin-manager' })
 // 或
 plugin_manager({ action: 'install_bundle', target: 'https://github.com/kiluahh/dsh-session-plugin-manager' })
 ```
+
+npm 包名：[`dsh-session-plugin-manager`](https://www.npmjs.com/package/dsh-session-plugin-manager)。
 
 确认 `application: applied`，重启 DSH（Host 半需要重启），刷新页面（Client bundle 需要重新取）。
 
